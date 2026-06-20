@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PIC AI Knowledge Assistant | Active Portfolio</title>
+  <style>
+    :root {
+      --ink: #152238;
+      --navy: #1f3c5b;
+      --indigo: #3b2f63;
+      --plum: #5f3b6d;
+      --coral: #e47c63;
+      --gold: #f3c969;
+      --sage: #9fc9a6;
+      --mint: #eef7f1;
+      --cream: #fff8ef;
+      --paper: #ffffff;
+      --mist: #f5f7fb;
+      --text: #415064;
+      --muted: #718096;
+      --line: rgba(31,60,91,0.12);
+      --shadow: 0 24px 60px rgba(31, 60, 91, 0.16);
+      --soft-shadow: 0 12px 28px rgba(31, 60, 91, 0.09);
+      --radius: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(228,124,99,0.15), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(159,201,166,0.22), transparent 24%),
+        linear-gradient(180deg, var(--cream), #ffffff 45%, #f6f8fb 100%);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: rgba(255,248,239,0.82);
+      border-bottom: 1px solid rgba(31,60,91,0.09);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      color: var(--indigo);
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--indigo), var(--coral));
+      box-shadow: 0 12px 24px rgba(95,59,109,0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 0.94rem;
+      color: var(--text);
+      font-weight: 750;
+    }
+
+    .nav-links a:hover {
+      color: var(--coral);
+    }
+
+    .hero {
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(135deg, rgba(31,60,91,0.94), rgba(59,47,99,0.9), rgba(95,59,109,0.82)),
+        url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.12)' stroke-width='1'%3E%3Cpath d='M0 80h160M80 0v160'/%3E%3Ccircle cx='80' cy='80' r='36'/%3E%3Cpath d='M30 30l100 100M130 30L30 130'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      right: -160px;
+      top: 60px;
+      background: radial-gradient(circle, rgba(243,201,105,0.32), transparent 68%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff3dc;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.86rem;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      color: white;
+      font-size: clamp(2.6rem, 7vw, 5.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.075em;
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      color: #fff1d8;
+      font-size: clamp(1.12rem, 2.1vw, 1.55rem);
+      font-weight: 650;
+      max-width: 760px;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.86);
+      font-size: 1.06rem;
+      max-width: 670px;
+      margin-bottom: 30px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 19px;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #2b2540;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.32);
+    }
+
+    .hero-panel {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 34px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 32px 70px rgba(0,0,0,0.18);
+      color: white;
+    }
+
+    .active-card {
+      background: rgba(255,255,255,0.92);
+      color: var(--ink);
+      border-radius: 26px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 18px 36px rgba(0,0,0,0.14);
+    }
+
+    .active-card h3 {
+      color: var(--indigo);
+      margin-bottom: 8px;
+      font-size: 1.25rem;
+    }
+
+    .active-card p {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .mini-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      color: rgba(255,255,255,0.86);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .pulse {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 8px rgba(243,201,105,0.18);
+    }
+
+    section {
+      padding: 82px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 42px;
+    }
+
+    .label {
+      display: inline-block;
+      background: rgba(228,124,99,0.13);
+      color: var(--plum);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+      color: var(--indigo);
+      margin-bottom: 12px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--soft-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(243,201,105,0.13), transparent 46%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      color: var(--indigo);
+      margin-bottom: 9px;
+      font-size: 1.18rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--text);
+      font-size: 0.96rem;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--cream), #fff);
+      color: var(--coral);
+      font-size: 1.42rem;
+      box-shadow: inset 0 0 0 1px rgba(228,124,99,0.12);
+    }
+
+    .about {
+      background: linear-gradient(180deg, #ffffff, #fff8ef);
+    }
+
+    .about-wrap {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .feature-panel {
+      background:
+        linear-gradient(145deg, rgba(31,60,91,0.98), rgba(95,59,109,0.92)),
+        radial-gradient(circle at top right, rgba(243,201,105,0.25), transparent 42%);
+      color: white;
+      border-radius: 32px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-panel h3 {
+      font-size: 1.55rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-panel p {
+      color: rgba(255,255,255,0.86);
+      margin-bottom: 20px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #fff6e5;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-weight: 800;
+      font-size: 0.84rem;
+    }
+
+    .solution {
+      background:
+        radial-gradient(circle at 10% 10%, rgba(159,201,166,0.18), transparent 26%),
+        linear-gradient(180deg, #fff8ef, #ffffff);
+    }
+
+    .module-card {
+      min-height: 210px;
+      border-left: 7px solid var(--coral);
+    }
+
+    .module-num {
+      color: var(--coral);
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 950;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .explorer {
+      background: linear-gradient(180deg, #ffffff, #f5f7fb);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(95,59,109,0.16);
+      background: white;
+      color: var(--indigo);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 850;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(31,60,91,0.06);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--indigo);
+      color: white;
+    }
+
+    .portfolio-card {
+      cursor: pointer;
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+
+    .tag {
+      background: var(--mint);
+      color: var(--navy);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 850;
+    }
+
+    .open-btn {
+      align-self: flex-start;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 13px;
+      color: white;
+      background: linear-gradient(135deg, var(--indigo), var(--coral));
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .research {
+      background:
+        linear-gradient(135deg, rgba(31,60,91,0.96), rgba(59,47,99,0.94)),
+        radial-gradient(circle at 86% 18%, rgba(243,201,105,0.22), transparent 28%);
+      color: white;
+    }
+
+    .research .label {
+      background: rgba(255,255,255,0.12);
+      color: #fff1d1;
+    }
+
+    .research h2,
+    .research .section-head p {
+      color: white;
+    }
+
+    .research .section-head p {
+      color: rgba(255,255,255,0.82);
+    }
+
+    .research-box {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 32px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+    }
+
+    details {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 18px;
+      font-weight: 900;
+      color: white;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details-body {
+      padding: 0 18px 18px;
+      color: rgba(255,255,255,0.84);
+    }
+
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      margin-top: 24px;
+      background: white;
+      color: var(--ink);
+    }
+
+    .evidence-table th {
+      background: #fff0cf;
+      color: var(--indigo);
+      padding: 14px;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .evidence-table td {
+      padding: 14px;
+      border-top: 1px solid #eceff5;
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .workflow {
+      background: linear-gradient(180deg, #ffffff, #fff8ef);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      color: white;
+      background: linear-gradient(135deg, var(--indigo), var(--coral));
+      font-weight: 950;
+      box-shadow: 0 16px 30px rgba(228,124,99,0.22);
+    }
+
+    .limitations {
+      background:
+        radial-gradient(circle at 80% 10%, rgba(159,201,166,0.17), transparent 26%),
+        linear-gradient(180deg, #f5f7fb, #ffffff);
+    }
+
+    .limit-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 13px;
+    }
+
+    .limit-item {
+      display: flex;
+      gap: 14px;
+      padding: 16px 18px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 10px 24px rgba(31,60,91,0.07);
+      color: var(--text);
+    }
+
+    .check {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--coral);
+      font-weight: 900;
+    }
+
+    .next {
+      padding-bottom: 92px;
+    }
+
+    .next-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .next-card {
+      min-height: 148px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 900;
+      color: var(--indigo);
+      background: linear-gradient(135deg, #ffffff, var(--cream));
+    }
+
+    footer {
+      padding: 34px 0;
+      text-align: center;
+      background: var(--indigo);
+      color: rgba(255,255,255,0.82);
+      font-weight: 700;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(21,34,56,0.62);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(920px, 96vw);
+      max-height: 88vh;
+      overflow: auto;
+      background: white;
+      border-radius: 30px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .modal-header {
+      padding: 24px 26px;
+      color: white;
+      background: linear-gradient(135deg, var(--indigo), var(--coral));
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .modal-header h3 {
+      font-size: 1.55rem;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .modal-header p {
+      color: rgba(255,255,255,0.86);
+    }
+
+    .close {
+      min-width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.34);
+      border-radius: 50%;
+      color: white;
+      background: rgba(255,255,255,0.12);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 26px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .mini-panel {
+      background: #f7f8fc;
+      border: 1px solid rgba(31,60,91,0.09);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .mini-panel h4 {
+      color: var(--indigo);
+      margin-bottom: 10px;
+    }
+
+    .mini-panel ul {
+      margin-left: 18px;
+      color: var(--text);
+    }
+
+    .doc-slots {
+      display: grid;
+      gap: 10px;
+    }
+
+    .doc-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: white;
+      border: 1px dashed rgba(95,59,109,0.22);
+      color: var(--text);
+      font-weight: 750;
+    }
+
+    .doc-link span:last-child {
+      color: var(--coral);
+      font-size: 0.84rem;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .prompt-box {
+      background: #fff8ef;
+      border: 1px solid rgba(243,201,105,0.45);
+      border-radius: 18px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .copy-btn {
+      border: none;
+      margin-top: 10px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--indigo);
+      color: white;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 930px) {
+      .hero-grid,
+      .about-wrap,
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .timeline,
+      .next-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: auto;
+        padding: 66px 0;
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .hero-panel {
+        display: none;
+      }
+
+      .grid-4,
+      .grid-3,
+      .grid-2,
+      .timeline,
+      .next-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .evidence-table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      .modal {
+        padding: 12px;
+      }
+
+      .modal-header {
+        padding: 20px;
+      }
+
+      .modal-body {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav container">
+      <a href="#top" class="brand" aria-label="PIC AI Knowledge Portfolio">
+        <span class="brand-mark">PIC</span>
+        <span>AI Knowledge Portfolio</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#solution">Modules</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#research">Deep Research</a>
+        <a href="#next">Next Steps</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Generative AI for Work & Research · Final Project</div>
+          <h1>PIC AI Knowledge Assistant</h1>
+          <h2>A Literature Portfolio for AMR and Infection Prevention</h2>
+          <p>
+            Using Generative AI to organise evidence, summarise literature, and support infection prevention research.
+            This revised version uses active portfolio placeholders and removes the inactive chatbot demo.
+          </p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="#portfolio">Open Active Portfolio</a>
+            <a class="btn btn-secondary" href="#research">View Deep Research</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="active-card">
+            <h3>Active one-page portfolio</h3>
+            <p>Each portfolio section opens a detail panel with document slots, summary placeholders, and AI prompts.</p>
+          </div>
+          <div class="active-card">
+            <h3>Two modules only</h3>
+            <p>Module 1: website / portfolio. Module 3: deep research and text analysis using LLMs.</p>
+          </div>
+          <div class="mini-status"><span class="pulse"></span> Presentation-ready structure</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container about-wrap">
+        <div class="feature-panel reveal">
+          <h3>Prevention-focused evidence hub</h3>
+          <p>
+            A practical portfolio that turns scattered literature and project materials into organised sections for
+            research, concept notes, and pilot ideas.
+          </p>
+          <div class="pills">
+            <span class="pill">AMR</span>
+            <span class="pill">IPC</span>
+            <span class="pill">Primary Care</span>
+            <span class="pill">OM-89</span>
+            <span class="pill">OM-85</span>
+            <span class="pill">Concept Notes</span>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <span class="label">About</span>
+          <h2>About the PIC Programme</h2>
+          <p>
+            PIC refers to the Prevention of Infection Committee, connected to work on infection prevention,
+            antimicrobial resistance, primary care, and public health research.
+          </p>
+          <p style="margin-top: 14px;">
+            The programme aims to support prevention-focused approaches, evidence-informed concept notes, and pilot
+            ideas that may reduce avoidable infections and unnecessary antibiotic use. This portfolio helps organise the
+            material so relevant information can be found quickly during research or presentation preparation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">Problem / Opportunity</span>
+          <h2>From scattered documents to usable evidence</h2>
+          <p>
+            The problem is not lack of information. The problem is that the information is spread across many documents
+            and needs to be transformed into practical outputs.
+          </p>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="card reveal">
+            <div class="icon">📚</div>
+            <h3>Large literature</h3>
+            <p>AMR and infection prevention literature is extensive and time-consuming to review.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon">🗂️</div>
+            <h3>Many document types</h3>
+            <p>Reports, papers, meeting notes, concept ideas, screenshots, and proposal materials need structure.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon">🔎</div>
+            <h3>Need fast retrieval</h3>
+            <p>During concept note writing, it should be easy to find key points, gaps, and supporting evidence.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon">✨</div>
+            <h3>AI-assisted synthesis</h3>
+            <p>LLMs can help summarise, compare, and convert documents into presentation-ready outputs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="solution">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">Course Modules</span>
+          <h2>Two-module version for an easy presentation</h2>
+          <p>
+            This version is deliberately simple for a short presentation: one visual portfolio and one deep research component.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="card module-card reveal">
+            <div class="module-num">Module 1</div>
+            <h3>Websites, Documents and Presentations</h3>
+            <p>
+              Used to create an elegant one-page portfolio website that organises PIC/AMR documents, concept ideas,
+              notes, evidence gaps, and presentation materials.
+            </p>
+          </div>
+          <div class="card module-card reveal">
+            <div class="module-num">Module 3</div>
+            <h3>Deep Research and Text Analysis using LLMs</h3>
+            <p>
+              Used to summarise AMR and infection prevention literature, extract key findings, compare evidence,
+              and prepare concept note material.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="explorer">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">Active Portfolio</span>
+          <h2>Click any section to open details</h2>
+          <p>
+            These sections are active placeholders. They open information panels where summaries, document links,
+            AI prompts, and future materials can be added.
+          </p>
+        </div>
+
+        <div class="toolbar reveal" aria-label="Portfolio filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="research">Research</button>
+          <button class="filter-btn" data-filter="proposal">Proposal</button>
+          <button class="filter-btn" data-filter="notes">Notes</button>
+          <button class="filter-btn" data-filter="presentation">Presentation</button>
+        </div>
+
+        <div class="grid grid-3" id="portfolioGrid">
+          <article class="card portfolio-card reveal" data-category="research" data-key="literature">
+            <div>
+              <div class="icon">📖</div>
+              <h3>Literature Review</h3>
+              <p>AMR, infection prevention, primary care, recurrent UTI, OM-89, OM-85, and antibiotic-sparing strategies.</p>
+              <div class="tag-row"><span class="tag">AMR</span><span class="tag">IPC</span><span class="tag">OM-89</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="proposal" data-key="concepts">
+            <div>
+              <div class="icon">💡</div>
+              <h3>Concept Ideas</h3>
+              <p>PIC pilot concepts, prevention-before-antibiotics ideas, primary care interventions, and community prevention.</p>
+              <div class="tag-row"><span class="tag">Pilot</span><span class="tag">Primary Care</span><span class="tag">Prevention</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="notes" data-key="notes">
+            <div>
+              <div class="icon">🗒️</div>
+              <h3>Notes and Meeting Inputs</h3>
+              <p>Meeting notes, reflections, discussion points, early project planning, and supervisor feedback.</p>
+              <div class="tag-row"><span class="tag">Meetings</span><span class="tag">Reflections</span><span class="tag">Planning</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="proposal" data-key="pilot">
+            <div>
+              <div class="icon">🧪</div>
+              <h3>Pilot Proposal Materials</h3>
+              <p>Objectives, target groups, intervention design, feasibility, expected outcomes, and draft proposal sections.</p>
+              <div class="tag-row"><span class="tag">Objectives</span><span class="tag">Feasibility</span><span class="tag">Outcomes</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="research" data-key="aioutputs">
+            <div>
+              <div class="icon">🤖</div>
+              <h3>AI Deep Research Outputs</h3>
+              <p>AI-generated summaries, evidence tables, key themes, evidence gaps, and concept note paragraphs.</p>
+              <div class="tag-row"><span class="tag">LLM Summary</span><span class="tag">Evidence Table</span><span class="tag">Gaps</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="research" data-key="guidelines">
+            <div>
+              <div class="icon">📌</div>
+              <h3>Guidelines and Reports</h3>
+              <p>WHO reports, national reports, clinical guidelines, IPC resources, and AMR surveillance documents.</p>
+              <div class="tag-row"><span class="tag">WHO</span><span class="tag">Guidelines</span><span class="tag">Reports</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="research" data-key="gaps">
+            <div>
+              <div class="icon">🧭</div>
+              <h3>Evidence Gaps</h3>
+              <p>Questions that remain unclear, limitations of current evidence, and areas needing further investigation.</p>
+              <div class="tag-row"><span class="tag">Gaps</span><span class="tag">Limitations</span><span class="tag">Future Research</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="presentation" data-key="screenshots">
+            <div>
+              <div class="icon">🖼️</div>
+              <h3>Presentation Screenshots</h3>
+              <p>Backup screenshots for the live presentation, including AI outputs, prompt examples, and document summaries.</p>
+              <div class="tag-row"><span class="tag">Backup</span><span class="tag">Slides</span><span class="tag">Demo Proof</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+
+          <article class="card portfolio-card reveal" data-category="notes" data-key="stakeholders">
+            <div>
+              <div class="icon">🤝</div>
+              <h3>Stakeholder Notes</h3>
+              <p>Space for supervisor comments, PIC team discussion points, user needs, and implementation considerations.</p>
+              <div class="tag-row"><span class="tag">Feedback</span><span class="tag">Users</span><span class="tag">Implementation</span></div>
+            </div>
+            <button class="open-btn">Open section</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="research">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">Module 3</span>
+          <h2>Deep Research with LLMs</h2>
+          <p>
+            This section shows how LLMs can transform literature into concise summaries, evidence tables, gaps, and concept note material.
+          </p>
+        </div>
+
+        <div class="research-box reveal">
+          <details open>
+            <summary>AI-generated literature summary placeholder</summary>
+            <div class="details-body">
+              Add a short AI-generated paragraph here summarising the main link between AMR, infection prevention,
+              primary care, and antibiotic-sparing strategies.
+            </div>
+          </details>
+
+          <details>
+            <summary>Key findings and gaps placeholder</summary>
+            <div class="details-body">
+              Add bullet points here after deep research, for example: strongest evidence, weak evidence,
+              implementation challenges, and possible PIC pilot opportunities.
+            </div>
+          </details>
+
+          <details>
+            <summary>Concept note paragraph placeholder</summary>
+            <div class="details-body">
+              Add a polished paragraph here that explains the “prevention before antibiotics” concept for your proposal.
+            </div>
+          </details>
+
+          <table class="evidence-table" aria-label="Sample deep research evidence table">
+            <thead>
+              <tr>
+                <th>Theme</th>
+                <th>Key Finding</th>
+                <th>Relevance to PIC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AMR burden</td>
+                <td>AMR is a growing global public health threat.</td>
+                <td>Supports the need for prevention.</td>
+              </tr>
+              <tr>
+                <td>Infection prevention</td>
+                <td>Preventing infections can reduce antibiotic demand.</td>
+                <td>Directly relevant to PIC.</td>
+              </tr>
+              <tr>
+                <td>Recurrent UTI</td>
+                <td>Repeated infections can lead to repeated antibiotic use.</td>
+                <td>Possible pilot area.</td>
+              </tr>
+              <tr>
+                <td>OM-89</td>
+                <td>Non-antibiotic prevention approach studied for recurrent UTI.</td>
+                <td>Requires careful evidence review.</td>
+              </tr>
+              <tr>
+                <td>OM-85</td>
+                <td>Immunomodulatory approach studied for respiratory infections.</td>
+                <td>Secondary prevention example.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="workflow">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">How it works</span>
+          <h2>A simple active workflow</h2>
+          <p>
+            The portfolio is not only decorative. It provides clickable sections for organising and retrieving information.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="card step reveal">
+            <div class="step-number">1</div>
+            <h3>Collect documents</h3>
+            <p>Add PIC notes, reports, literature, concept ideas, and presentation proof.</p>
+          </div>
+          <div class="card step reveal">
+            <div class="step-number">2</div>
+            <h3>Organise portfolio</h3>
+            <p>Use active cards to separate literature, notes, proposal materials, and outputs.</p>
+          </div>
+          <div class="card step reveal">
+            <div class="step-number">3</div>
+            <h3>Run deep research</h3>
+            <p>Use LLMs to summarise, compare, and extract evidence gaps.</p>
+          </div>
+          <div class="card step reveal">
+            <div class="step-number">4</div>
+            <h3>Convert findings</h3>
+            <p>Turn evidence into concept notes, pilot ideas, and final presentation material.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="limitations" class="limitations">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">Responsible Use</span>
+          <h2>Limitations and responsible use</h2>
+          <p>AI is useful for organising and summarising, but expert review remains essential.</p>
+        </div>
+
+        <div class="limit-list">
+          <div class="limit-item reveal"><span class="check">✓</span><span>AI outputs need expert review before use in formal public health documents.</span></div>
+          <div class="limit-item reveal"><span class="check">✓</span><span>Document links must be added manually if the HTML file is used outside the original workspace.</span></div>
+          <div class="limit-item reveal"><span class="check">✓</span><span>Evidence around OM-89 and OM-85 should be interpreted carefully and transparently.</span></div>
+          <div class="limit-item reveal"><span class="check">✓</span><span>Confidential or sensitive information should not be uploaded or linked without permission.</span></div>
+          <div class="limit-item reveal"><span class="check">✓</span><span>A chatbot can be added later as a future module once documents are ready and permissions are clear.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="next" class="next">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="label">Next Steps</span>
+          <h2>Future improvements</h2>
+          <p>This version is ready for presentation, and it can be expanded later into a more interactive research hub.</p>
+        </div>
+
+        <div class="grid next-grid">
+          <div class="card next-card reveal">Add real document links</div>
+          <div class="card next-card reveal">Add AI summaries in each section</div>
+          <div class="card next-card reveal">Validate outputs with PIC members</div>
+          <div class="card next-card reveal">Develop pilot proposal</div>
+          <div class="card next-card reveal">Add chatbot later</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Created for the Generative AI for Work & Research final project.
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle">Section title</h3>
+          <p id="modalIntro">Section description</p>
+        </div>
+        <button class="close" id="closeModal" aria-label="Close details">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <div class="mini-panel">
+            <h4>Document slots</h4>
+            <div class="doc-slots" id="docSlots"></div>
+          </div>
+          <div class="mini-panel">
+            <h4>What to add here</h4>
+            <ul id="addList"></ul>
+          </div>
+        </div>
+
+        <div class="mini-panel">
+          <h4>Suggested AI prompt</h4>
+          <div class="prompt-box" id="promptBox"></div>
+          <button class="copy-btn" id="copyPrompt">Copy prompt</button>
+        </div>
+
+        <div class="mini-panel">
+          <h4>Presentation use</h4>
+          <p id="presentationUse"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sectionData = {
+      literature: {
+        title: "Literature Review",
+        intro: "A place for key AMR, IPC, primary care, recurrent UTI, OM-89, OM-85, and antibiotic-sparing evidence.",
+        docs: ["AMR burden paper / report", "Infection prevention and control report", "Primary care antibiotic stewardship paper", "OM-89 / Uro-Vaxom paper", "OM-85 / Broncho-Vaxom paper"],
+        add: ["Short summary of each paper", "Why each paper matters for PIC", "Evidence strength and limitations", "Possible use in concept note"],
+        prompt: "Summarise these literature documents for a PIC project. Extract the key findings, relevance to AMR and infection prevention, evidence gaps, and possible use in a concept note or pilot proposal.",
+        use: "Use this section to show that you organised your literature before using AI for deep research."
+      },
+      concepts: {
+        title: "Concept Ideas",
+        intro: "A workspace for prevention-first ideas, possible pilot concepts, and primary care/community interventions.",
+        docs: ["Prevention-before-antibiotics concept", "Primary care pilot concept", "Community prevention idea", "Patient communication idea"],
+        add: ["Problem statement", "Target group", "Intervention idea", "Expected outcome", "Feasibility notes"],
+        prompt: "Using the PIC literature and notes, generate three practical pilot concept ideas. For each idea include target group, intervention, expected outcome, feasibility, and possible limitations.",
+        use: "Use this section to show how AI helps turn research into practical project ideas."
+      },
+      notes: {
+        title: "Notes and Meeting Inputs",
+        intro: "A space for meeting notes, reflections, discussion points, and early planning material.",
+        docs: ["Meeting note 1", "Supervisor feedback", "Personal reflection", "Discussion questions"],
+        add: ["Important decisions", "Questions to clarify", "Action points", "People or stakeholders involved"],
+        prompt: "Turn these meeting notes into a structured summary with decisions, action points, open questions, and next steps for the PIC project.",
+        use: "Use this section to show that your portfolio is connected to real project work."
+      },
+      pilot: {
+        title: "Pilot Proposal Materials",
+        intro: "A section for developing a clearer pilot proposal from literature, notes, and concept ideas.",
+        docs: ["Pilot proposal draft", "Objectives", "Target group description", "Intervention design", "Expected outcomes"],
+        add: ["Background", "Aim and objectives", "Methods", "Feasibility", "Evaluation indicators"],
+        prompt: "Help me structure a short pilot proposal for PIC using the uploaded literature and concept ideas. Include background, aim, target group, intervention, outcomes, feasibility, and limitations.",
+        use: "Use this section if you want to demonstrate movement from literature review to real proposal development."
+      },
+      aioutputs: {
+        title: "AI Deep Research Outputs",
+        intro: "A place for AI-generated summaries, tables, gap analysis, and concept note paragraphs.",
+        docs: ["AI literature summary", "Evidence table", "Evidence gaps", "Concept note paragraph", "Prompt screenshots"],
+        add: ["Original prompt", "AI output", "Your edited version", "Reflection on accuracy", "How you used it"],
+        prompt: "Create a table from these documents with columns: theme, key finding, relevance to PIC, evidence strength, limitations, and possible use in a pilot proposal.",
+        use: "Use this section as proof that you used Module 3: Deep Research and Text Analysis using LLMs."
+      },
+      guidelines: {
+        title: "Guidelines and Reports",
+        intro: "A place for official reports, guidelines, surveillance documents, and policy-level references.",
+        docs: ["WHO AMR report", "WHO IPC report", "Swiss AMR report", "Clinical guideline", "Relevant policy brief"],
+        add: ["Key recommendations", "Local relevance", "Data points", "Quotes or statistics to verify"],
+        prompt: "Extract the most relevant recommendations from these guidelines and reports for a PIC-focused concept note. Separate global evidence from local or Swiss/Geneva relevance.",
+        use: "Use this section to make your portfolio look evidence-informed and credible."
+      },
+      gaps: {
+        title: "Evidence Gaps",
+        intro: "A place for unanswered questions, weak evidence, implementation gaps, and research opportunities.",
+        docs: ["Gap list", "Limitations from papers", "Questions for supervisor", "Future research ideas"],
+        add: ["What is known", "What is unclear", "What needs validation", "Possible PIC contribution"],
+        prompt: "Identify evidence gaps from these documents. Explain what is known, what remains uncertain, and which gaps could be addressed by a small PIC pilot project.",
+        use: "Use this section in your reflection and next steps slide."
+      },
+      screenshots: {
+        title: "Presentation Screenshots",
+        intro: "Backup proof for the live demo: screenshots of AI prompts, outputs, document organisation, and summary tables.",
+        docs: ["Portfolio screenshot", "Deep research prompt screenshot", "AI output screenshot", "Evidence table screenshot", "Presentation backup image"],
+        add: ["Screenshot title", "What it proves", "Which module it shows", "How it supports your demo"],
+        prompt: "Create a short caption for each screenshot explaining what it shows and which course module it demonstrates.",
+        use: "Use this section as your backup plan if the live demonstration does not work."
+      },
+      stakeholders: {
+        title: "Stakeholder Notes",
+        intro: "A space for stakeholder comments, supervisor feedback, user needs, and implementation considerations.",
+        docs: ["Supervisor comments", "PIC member feedback", "User needs", "Implementation barriers", "Ethics/confidentiality note"],
+        add: ["Who gave feedback", "Main concern", "Suggested improvement", "How it affects the pilot"],
+        prompt: "Summarise these stakeholder notes into key needs, concerns, opportunities, and implementation considerations for the PIC project.",
+        use: "Use this section to show reflection, responsibility, and real-world value."
+      }
+    };
+
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalIntro = document.getElementById("modalIntro");
+    const docSlots = document.getElementById("docSlots");
+    const addList = document.getElementById("addList");
+    const promptBox = document.getElementById("promptBox");
+    const presentationUse = document.getElementById("presentationUse");
+    const closeModal = document.getElementById("closeModal");
+    const copyPrompt = document.getElementById("copyPrompt");
+
+    function openSection(key) {
+      const data = sectionData[key];
+      if (!data) return;
+
+      modalTitle.textContent = data.title;
+      modalIntro.textContent = data.intro;
+      docSlots.innerHTML = data.docs.map((doc, index) => `
+        <a class="doc-link" href="#" title="Replace # with your real document link or file path">
+          <span>${index + 1}. ${doc}</span>
+          <span>Add link</span>
+        </a>
+      `).join("");
+      addList.innerHTML = data.add.map(item => `<li>${item}</li>`).join("");
+      promptBox.textContent = data.prompt;
+      presentationUse.textContent = data.use;
+
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    document.querySelectorAll(".portfolio-card").forEach(card => {
+      card.addEventListener("click", () => openSection(card.dataset.key));
+      card.querySelector(".open-btn").addEventListener("click", (event) => {
+        event.stopPropagation();
+        openSection(card.dataset.key);
+      });
+    });
+
+    function closeDetails() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    closeModal.addEventListener("click", closeDetails);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeDetails();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeDetails();
+    });
+
+    copyPrompt.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(promptBox.textContent);
+        copyPrompt.textContent = "Copied";
+        setTimeout(() => copyPrompt.textContent = "Copy prompt", 1200);
+      } catch (error) {
+        copyPrompt.textContent = "Select and copy";
+        setTimeout(() => copyPrompt.textContent = "Copy prompt", 1500);
+      }
+    });
+
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+        portfolioCards.forEach(card => {
+          const show = filter === "all" || card.dataset.category === filter;
+          card.style.display = show ? "flex" : "none";
+        });
+      });
+    });
+
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
