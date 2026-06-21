@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/06/20/23/20260620231524-7MP8Y9CN.js" defer></script>
-    
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PIC AI Knowledge Assistant | Active Portfolio</title>
@@ -903,10 +899,10 @@
         <div>
           <div class="eyebrow">Generative AI for Work & Research · Final Project</div>
           <h1>PIC AI Knowledge Assistant</h1>
-          <h2>A Literature Portfolio for AMR and Infection Prevention</h2>
+          <h2>A Literature Portfolio and Chatbot for AMR and Infection Prevention</h2>
           <p>
             Using Generative AI to organise evidence, summarise literature, and support infection prevention research.
-            This revised version uses active portfolio placeholders and removes the inactive chatbot demo.
+            This version combines a literature portfolio with a focused PIC/AMR chatbot demo.
           </p>
           <div class="button-row">
             <a class="btn btn-primary" href="#portfolio">Open Active Portfolio</a>
@@ -921,7 +917,7 @@
           </div>
           <div class="active-card">
             <h3>Two modules only</h3>
-            <p>Module 1: website / portfolio. Module 3: deep research and text analysis using LLMs.</p>
+            <p>Module 1: website / portfolio. Module 4: chatbot / agent demo.</p>
           </div>
           <div class="mini-status"><span class="pulse"></span> Presentation-ready structure</div>
         </div>
@@ -1002,9 +998,9 @@
       <div class="container">
         <div class="section-head reveal">
           <span class="label">Course Modules</span>
-          <h2>Two-module version for an easy presentation</h2>
+          <h2>Two-module version for tomorrow’s presentation</h2>
           <p>
-            This version is deliberately simple for a short presentation: one visual portfolio and one deep research component.
+            This version is deliberately simple for a short presentation: one visual portfolio and one focused chatbot demo.
           </p>
         </div>
 
@@ -1018,11 +1014,11 @@
             </p>
           </div>
           <div class="card module-card reveal">
-            <div class="module-num">Module 3</div>
-            <h3>Deep Research and Text Analysis using LLMs</h3>
+            <div class="module-num">Module 4</div>
+            <h3>Chatbots / Agents</h3>
             <p>
-              Used to summarise AMR and infection prevention literature, extract key findings, compare evidence,
-              and prepare concept note material.
+              Used to create a focused PIC/AMR chatbot that can answer questions from the uploaded knowledge base,
+              summarise literature, and support concept note ideas.
             </p>
           </div>
         </div>
@@ -1054,7 +1050,13 @@
               <div class="icon">📖</div>
               <h3>Literature Review</h3>
               <p>AMR, infection prevention, primary care, recurrent UTI, OM-89, OM-85, and antibiotic-sparing strategies.</p>
-              <div class="tag-row"><span class="tag">AMR</span><span class="tag">IPC</span><span class="tag">OM-89</span></div>
+              <div class="tag-row"><span class="tag">5 uploaded summaries</span><span class="tag">AMR</span><span class="tag">IPC</span><span class="tag">OM-89</span></div>
+              <ul style="margin: 8px 0 0 18px; color: var(--text); font-size: 0.88rem;">
+                <li>AMR burden</li>
+                <li>IPC report</li>
+                <li>Primary care stewardship</li>
+                <li>OM-89 / OM-85</li>
+              </ul>
             </div>
             <button class="open-btn">Open section</button>
           </article>
@@ -1264,7 +1266,7 @@
           <div class="limit-item reveal"><span class="check">✓</span><span>Document links must be added manually if the HTML file is used outside the original workspace.</span></div>
           <div class="limit-item reveal"><span class="check">✓</span><span>Evidence around OM-89 and OM-85 should be interpreted carefully and transparently.</span></div>
           <div class="limit-item reveal"><span class="check">✓</span><span>Confidential or sensitive information should not be uploaded or linked without permission.</span></div>
-          <div class="limit-item reveal"><span class="check">✓</span><span>A chatbot can be added later as a future module once documents are ready and permissions are clear.</span></div>
+          <div class="limit-item reveal"><span class="check">✓</span><span>The chatbot should use the same literature documents in Botpress Knowledge Base for more accurate answers.</span></div>
         </div>
       </div>
     </section>
@@ -1282,7 +1284,7 @@
           <div class="card next-card reveal">Add AI summaries in each section</div>
           <div class="card next-card reveal">Validate outputs with PIC members</div>
           <div class="card next-card reveal">Develop pilot proposal</div>
-          <div class="card next-card reveal">Add chatbot later</div>
+          <div class="card next-card reveal">Embed chatbot demo</div>
         </div>
       </div>
     </section>
@@ -1332,7 +1334,13 @@
       literature: {
         title: "Literature Review",
         intro: "A place for key AMR, IPC, primary care, recurrent UTI, OM-89, OM-85, and antibiotic-sparing evidence.",
-        docs: ["AMR burden paper / report", "Infection prevention and control report", "Primary care antibiotic stewardship paper", "OM-89 / Uro-Vaxom paper", "OM-85 / Broncho-Vaxom paper"],
+        docs: [
+          { title: "PIC LitReview 1 — AMR burden", href: "./PIC_LitReview_1_AMR_burden%20(4).docx" },
+          { title: "PIC LitReview 2 — IPC report", href: "./PIC_LitReview_2_IPC_report.docx" },
+          { title: "PIC LitReview 3 — Primary care stewardship", href: "./PIC_LitReview_3_Primary_care_stewardship.docx" },
+          { title: "PIC LitReview 4 — OM-89 / Uro-Vaxom", href: "./PIC_LitReview_4_OM-89_Uro-Vaxom.docx" },
+          { title: "PIC LitReview 5 — OM-85 / Broncho-Vaxom", href: "./PIC_LitReview_5_OM-85_Broncho-Vaxom.docx" }
+        ],
         add: ["Short summary of each paper", "Why each paper matters for PIC", "Evidence strength and limitations", "Possible use in concept note"],
         prompt: "Summarise these literature documents for a PIC project. Extract the key findings, relevance to AMR and infection prevention, evidence gaps, and possible use in a concept note or pilot proposal.",
         use: "Use this section to show that you organised your literature before using AI for deep research."
@@ -1419,12 +1427,18 @@
 
       modalTitle.textContent = data.title;
       modalIntro.textContent = data.intro;
-      docSlots.innerHTML = data.docs.map((doc, index) => `
-        <a class="doc-link" href="#" title="Replace # with your real document link or file path">
-          <span>${index + 1}. ${doc}</span>
-          <span>Add link</span>
-        </a>
-      `).join("");
+      docSlots.innerHTML = data.docs.map((doc, index) => {
+        const title = typeof doc === "string" ? doc : doc.title;
+        const href = typeof doc === "string" ? "#" : doc.href;
+        const label = typeof doc === "string" ? "Add link" : "Open file";
+        const target = href === "#" ? "" : 'target="_blank" rel="noopener noreferrer"';
+        return `
+          <a class="doc-link" href="${href}" ${target} title="Open or replace this document link">
+            <span>${index + 1}. ${title}</span>
+            <span>${label}</span>
+          </a>
+        `;
+      }).join("");
       addList.innerHTML = data.add.map(item => `<li>${item}</li>`).join("");
       promptBox.textContent = data.prompt;
       presentationUse.textContent = data.use;
